@@ -13,6 +13,10 @@ let handpose;
 let predictions = [];
 let handDetected = false;
 
+//osbticle variables
+let obstaclePosition;
+let obstacleRadius = 40;
+
 window.addEventListener("load", () => {
   player = new Tone.Player("/nikes.mp3");
   oscillator = new Tone.Oscillator(440, "sine").toDestination();
@@ -129,6 +133,11 @@ function flockBoids(b, boids) {
   b.acceleration.add(alignment);
   b.acceleration.add(cohesion);
   b.acceleration.add(separation);
+
+  if (obstaclePosition) {
+    let avoidance = avoidObstacle(b);
+    b.acceleration.add(avoidance);
+  }
 }
 
 // UPDATE
@@ -250,8 +259,32 @@ function drawHand() {
 
     fill(255, 0, 0);
     noStroke();
-    ellipse(x, y, 40);
+    ellipse(x, y, obstacleRadius);
+
+    obstaclePosition = createVector(x, y);
   } else {
     handDetected = false;
+    obstaclePosition = null;
   }
+}
+
+// AVOID OBSTACLE FUNCTION
+function avoidObstacle(b) {
+  let avoidanceForce = createVector(0, 0);
+  let obstacleDist = dist(
+    b.position.x,
+    b.position.y,
+    obstaclePosition.x,
+    obstaclePosition.y
+  );
+
+  if (obstacleDist < obstacleRadius + 100) {
+    let diff = p5.Vector.sub(b.position, obstaclePosition);
+    diff.setMag(b.maxSpeed);
+    diff.sub(b.velocity);
+    diff.limit(b.maxForce);
+    avoidanceForce.add(diff);
+  }
+
+  return avoidanceForce;
 }
