@@ -90,10 +90,10 @@ function draw() {
     // );
 
     // change boid velocity depending on frequency from the song
-    // let newVelocity = p5.Vector.random2D().setMag(
-    //   map(frequencyValue, -100, 0, 2, 100)
-    // );
-    // boid.velocity.lerp(newVelocity, 0.1);
+    let newVelocity = p5.Vector.random2D().setMag(
+      map(frequencyValue, -100, 0, 2, 40)
+    );
+    boid.velocity.lerp(newVelocity, 0.1);
 
     showBoid(boid);
   }
@@ -111,14 +111,24 @@ function createBoid() {
   } else if (behaviorChance < 0.2) {
     behavior = "introvert";
   } else {
-    behavior = "normal"; // default behavior
+    behavior = "normal"; // neutral behavior
   }
 
   let boidColor;
   if (behavior === "extrovert") {
-    boidColor = color(255, 255, 0); // yellow color for extrovert behavior
+    boidColor = color(
+      random(200, 255),
+      random(200, 255),
+      random(0, 10),
+      random(2, 150)
+    ); // yellow color for extrovert behavior
   } else if (behavior === "introvert") {
-    boidColor = color(255, 0, 0); // red color for introvert behavior
+    boidColor = color(
+      random(240, 255),
+      random(240, 255),
+      random(240, 255),
+      random(2, 150)
+    ); // red color for introvert behavior
   } else {
     boidColor = color(random(10), random(255), random(255), random(2, 150));
     // blue and or green color for normal behavior
