@@ -23,7 +23,7 @@ let canvasHeight = 500; //windowHeight;
 
 //LOAD
 window.addEventListener("load", () => {
-  player = new Tone.Player("/cc-final-project/nikes.mp3");
+  player = new Tone.Player("nikes.mp3");
   oscillator = new Tone.Oscillator(440, "sine").toDestination();
 
   analyser = new Tone.Analyser("fft", 512);
