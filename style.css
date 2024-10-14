@@ -1,4 +1,29 @@
 body,
 html {
+  height: 100vh;
   margin: 0px auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: rgb(71, 42, 97);
+  color: aliceblue;
+  font-family: inter;
+}
+
+.conatiner {
+  text-align: center;
+}
+
+canvas {
+  margin-top: 40px;
+  border-radius: 20px;
+}
+
+button {
+  color: black;
+  padding: 10px;
+}
+
+a {
+  color: rgb(230, 107, 35);
 }

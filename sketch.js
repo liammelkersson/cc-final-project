@@ -48,7 +48,7 @@ window.addEventListener("click", () => {
 //SETUP
 function setup() {
   createCanvas(canvasWidth, canvasHeight);
-  // frameRate(60);
+  frameRate(80);
 
   video = createCapture(VIDEO);
   video.size(canvasWidth, canvasHeight);
